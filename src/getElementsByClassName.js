@@ -4,19 +4,16 @@
 // };
 
 // But instead we're going to implement it from scratch:
-
-
 var hasClass = function(className,node) {
   var list = node.classList;
-  return list.contains(className);
+  return list === undefined ? false : list.contains(className);
 };
-
 var getElementsByClassName = function(className, node) {
   node = node || document.body;
   var results = hasClass(className,node) ? [node] : [];
 
-  for (var i = 0; i < node.children.length; i++){
-    results = results.concat(getElementsByClassName(className, node.children[i]));
+  for (var i = 0; i < node.childNodes.length; i++){
+    results = results.concat(getElementsByClassName(className, node.childNodes[i]));
   }
   return results;
 };
